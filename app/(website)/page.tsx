@@ -1,4 +1,6 @@
+import { Button } from "@/components/ui/button";
 import { Home, Medal } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 export default function WebsitePage() {
@@ -16,6 +18,9 @@ export default function WebsitePage() {
           Valley Green Residence
         </div>
       </div>
+      <Button className="mt-6" size="lg" asChild>
+        <Link href="/test">Guest</Link>
+      </Button>
     </div>
   );
 }
