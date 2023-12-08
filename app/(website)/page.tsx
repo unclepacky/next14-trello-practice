@@ -5,10 +5,17 @@ import React from "react";
 
 import { cn } from "@/lib/utils";
 
+import { Poppins } from "next/font/google";
+
 import localFont from "next/font/local";
 
 const headingFont = localFont({
   src: "../../public/fonts/font.woff2",
+});
+
+const buttonFont = Poppins({
+  subsets: ["latin"],
+  weight: ["100", "300", "500", "700", "900"],
 });
 
 export default function WebsitePage() {
@@ -31,7 +38,7 @@ export default function WebsitePage() {
           Valley Green Residence
         </div>
       </div>
-      <Button className="mt-6" size="lg" asChild>
+      <Button className={cn("mt-6", buttonFont.className)} size="lg" asChild>
         <Link href="/test">Guest</Link>
       </Button>
     </div>
