@@ -3,10 +3,23 @@ import { Home, Medal } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
+import { cn } from "@/lib/utils";
+
+import localFont from "next/font/local";
+
+const headingFont = localFont({
+  src: "../../public/fonts/font.woff2",
+});
+
 export default function WebsitePage() {
   return (
     <div className="flex items-center justify-center flex-col">
-      <div className="flex items-center justify-center flex-col">
+      <div
+        className={cn(
+          "flex items-center justify-center flex-col",
+          headingFont.className
+        )}
+      >
         {/* <Medal
           color="red"
           size={48}
