@@ -6,9 +6,9 @@ export default function OrganizationIdLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <div className=" bg-amber-200  w-full">
       <OrgControl />
       {children}
-    </>
+    </div>
   );
 }
