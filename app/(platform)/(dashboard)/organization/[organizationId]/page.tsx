@@ -1,7 +1,8 @@
-import { OrganizationSwitcher, auth, currentUser } from "@clerk/nextjs";
-import Image from "next/image";
-import React from "react";
-
+import { create } from "@/actions/create-board";
+import { Button } from "@/components/ui/button";
+import { db } from "@/lib/db";
+import { Board } from "./Board";
+import Form from "./form";
 interface Props {
   params: { organizationId: string };
 }
@@ -9,33 +10,17 @@ interface Props {
 export default async function OrganizationIdPage({
   params: { organizationId },
 }: Props) {
-  const user = await currentUser();
-  const { userId, orgId, orgRole, orgSlug } = auth();
-  return (
-    <div>
-      <div>OrganizationIdPage : {organizationId}</div>
-      <div className="bg-amber-200">
-        <ol>
-          <li>userId : {userId}</li>
-          <li>orgId : {orgId}</li>
-          <li>orgRole : {orgRole}</li>
-          <li>orgSlug : {orgSlug}</li>
-        </ol>
-      </div>
-      <div>UserName is : {user?.firstName}</div>
-      <div>UserID is : {user?.id}</div>
+  const boards = await db.board.findMany();
 
-      {/* <div className="rounded-full overflow-hidden w-[75px] h-[75px] object-contain"> */}
-      <div className="rounded-full overflow-hidden w-[75px] h-[75px]">
-        <Image
-          src={user?.imageUrl || "/noavatar.png"}
-          alt="Profile Pic"
-          width={75}
-          height={75}
-          className=" object-cover h-full w-full"
-        />
+  return (
+    <div className=" flex flex-col space-y-4">
+      <Form />
+      <div className=" space-y-2">
+        {boards.map((board) => (
+          // <div key={board.id}> Board Name is: {board.title}</div>
+          <Board key={board.id} id={board.id} title={board.title} />
+        ))}
       </div>
-      <OrganizationSwitcher hidePersonal />
     </div>
   );
 }
